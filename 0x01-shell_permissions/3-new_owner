@@ -1,2 +1,2 @@
 #!/bin/bash
-betty
+sudo chown betty hello
