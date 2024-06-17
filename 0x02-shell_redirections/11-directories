@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type d ! -path '*/..' ! -path '.' -print | grep -v '^./' | wc -l
+find . -mindepth 2 -maxdepth 2 ! -path '*/..' ! -name '.' -not -path '*/.*' -type d | wc -l
