@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -mindepth 2 -maxdepth 2 ! -path '*/..' ! -name '.' -not -iregex '.*/[.]*' -type d | wc -l
+find . -type d -not -name '.' | wc -l
