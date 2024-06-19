@@ -1,0 +1,2 @@
+#!/bin/sh
+export DECIMAL=4 | echo "obase=16; $DECIMAL" | bc
