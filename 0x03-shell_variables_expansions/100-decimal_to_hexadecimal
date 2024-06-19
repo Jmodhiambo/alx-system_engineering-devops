@@ -1,2 +1,2 @@
 #!/bin/bash
-export DECIMAL=4 | echo "obase=16; $DECIMAL" | bc
+#export DECIMAL=4 | echo "obase=16; $DECIMAL" | bc
