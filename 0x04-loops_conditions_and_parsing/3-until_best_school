@@ -2,7 +2,7 @@
 # This script prints "Best School" 10 times using until loop
 
 count=1
-until [ $count -ge 10 ]
+until [ $count -gt 10 ]
 do
 	echo "Best School"
 	count=$((count + 1))
