@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Parse and sort Apache log by occurrences of IP and HTTP status code
 
-awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -rn | awk '{printf "%6d %s %s\n", $1, $2, $3}'
+awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -rn
