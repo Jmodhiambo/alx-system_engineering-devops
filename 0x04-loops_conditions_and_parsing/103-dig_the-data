@@ -1,4 +1,25 @@
 #!/usr/bin/env bash
 # This script parses Apache logs, groups by IP and HTTP status code, and sorts the results by occurrence count
 
-awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -rn | awk '{printf "%8s %s %s\n", $1, $2, $3}'
+LOG_FILE="apache-access.log"
+
+# Check if the log file exists
+if [ ! -e "$LOG_FILE" ]; then
+    echo "Error: $LOG_FILE does not exist."
+    exit 1
+fi
+
+# Check if the log file is readable
+if [ ! -r "$LOG_FILE" ]; then
+    echo "Error: $LOG_FILE is not readable."
+    exit 1
+fi
+
+# Check if the log file is not empty
+if [ ! -s "$LOG_FILE" ]; then
+    echo "Error: $LOG_FILE is empty."
+    exit 1
+fi
+
+# Process the log file
+awk '{print $1, $9}' "$LOG_FILE" | sort | uniq -c | sort -rn | awk '{printf "%8s %s %s\n", $1, $2, $3}'
