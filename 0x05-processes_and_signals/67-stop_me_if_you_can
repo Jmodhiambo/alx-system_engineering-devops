@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#This script stops the 4-to_infinity_and_beyond process without using kill or killall
+
+# Get the PID of the 4-to_infinity_and_beyond process
+pid=$(pgrep -f "7-highlander")
+
+# Check if the process is running
+if [ -n "$pid" ]; then
+	# Here we use the SIGTERM signal via the /proc filesystem
+	pkill -SIGTERM -f "7-highlander" > /dev/null 2>&1
+fi
