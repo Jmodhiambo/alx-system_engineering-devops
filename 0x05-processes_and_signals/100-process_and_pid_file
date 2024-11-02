@@ -13,6 +13,7 @@ handle_sigterm() {
 # Function to handle SIGINT
 handle_sigint() {
 	echo "Y U no love me?!"
+	exit 0
 }
 
 # Function to handle SIGQUIT
@@ -31,3 +32,6 @@ while true; do
 	echo "To infinity and beyond"
 	sleep 2
 done
+
+# Clean up PID file on exit
+rm -f /var/run/myscript.pid
