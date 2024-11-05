@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Manages manage_my_process
+
+# Define paths
+PID_FILE="/var/run/my_process.pid"
+SCRIPT="/home/jmodhiambo/projects_alx/alx-system_engineering-devops/0x05-processes_and_signals/manage_my_process"
+
+# Function to start manage_my_process
+start() {
+	if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2> /dev/null; then
+                return 
+        fi
+	nohup "$SCRIPT" &> /tmp/manage_my_process.log &
+	echo $! > "$PID_FILE"
+	[[ "$1" != "silent" ]] && echo "manage_my_process started"
+}
+
+# Function to stop manage_my_process
+stop() {
+	if [ -f "$PID_FILE" ]; then
+		if kill -0 "$(cat "$PID_FILE")" 2> /dev/null; then
+			kill "$(cat "$PID_FILE")"
+			[[ "$1" != "silent" ]] && echo "manage_my_process stopped"
+		fi
+		rm -f "$PID_FILE"
+	fi
+}
+
+# Function to restart manage_my_process
+restart() {
+	stop silent
+	start silent
+	echo "manage_my_process restarted"
+}
+
+# Check the input argument
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	*)
+		echo "Usage: manage_my_process {start|stop|restart}"
+		exit 1
+		;;
+esac
