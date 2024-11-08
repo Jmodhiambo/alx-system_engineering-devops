@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Using netstat for older systems or compatibility
+
+sudo netstat -tulnp
