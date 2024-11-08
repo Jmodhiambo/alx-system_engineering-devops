@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script listens on port 98 on localhost and displays any text received.
+
+# Print a message indicating the script is running
+echo "Starting my script."
+
+# Use netcat (nc) to listen on port 98 on localhost and display received data
+nc -lvnp 98
