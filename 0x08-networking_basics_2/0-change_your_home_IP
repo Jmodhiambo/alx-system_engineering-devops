@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# This script modifies the /etc/hosts file to change the IP address of localhost to 127.0.0.2
-# and resolves facebook.com to 8.8.8.8.
+# Changes the IP of localhost and facebook.com
 
-# Backup the /etc/hosts file before making changes
-cp /etc/hosts /etc/hosts.bak
+# Define the target hosts and IPs
+LOCALHOST_IP="127.0.0.2"
+FACEBOOK_IP="8.8.8.8"
 
-# Modify localhost to resolve to 127.0.0.2
-sed -i 's/^127.0.0.1\s\+localhost$/127.0.0.2 localhost/' /etc/hosts
+# Backup the original /etc/hosts file
+cp /etc/hosts /etc/hosts.backup
 
-# Modify facebook.com to resolve to 8.8.8.8
-sed -i 's/^[^#]*facebook.com\s\+.*$/8.8.8.8 facebook.com/' /etc/hosts
-
-# Output the current /etc/hosts file for verification
-echo "Current /etc/hosts file:"
-cat /etc/hosts
+# Update the /etc/hosts file with the specified configurations
+# Replace existing localhost entry with new IP and add Facebook entry
+{
+    echo "$LOCALHOST_IP localhost"
+    echo "$FACEBOOK_IP facebook.com"
+} | sudo tee /etc/hosts > /dev/null
