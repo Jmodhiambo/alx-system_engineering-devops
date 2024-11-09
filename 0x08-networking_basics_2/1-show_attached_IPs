@@ -2,4 +2,4 @@
 # This script displays all active IPv4 IP addresses on the machine
 
 # Use the 'ip' command to show IPv4 addresses, filtering for inet (IPv4) entries
-/sbin/ifconfig | grep -oP '(?<=inet\s)\d+(\.\d+){3}' 
+hostname -I | tr ' ' '\n' 
