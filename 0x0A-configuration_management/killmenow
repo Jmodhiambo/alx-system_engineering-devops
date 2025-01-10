@@ -1,0 +1,6 @@
+#!/bin/bash
+while [[ true ]]
+do
+    echo "Kill me now"
+    sleep 2
+done
