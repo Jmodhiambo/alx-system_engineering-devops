@@ -1,0 +1,6 @@
+# ~/.ssh/config
+Host 806536-web-01
+    HostName 806536-web-01
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
