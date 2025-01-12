@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Client configuration file
 
 file_line { 'Declare identity file':
