@@ -1,11 +1,13 @@
 # Client configuration file
 
-file { '/home/ubuntu/.ssh/config':
-  ensure  => file,
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  mode    => '0600',
-  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
-  # You can add a condition to avoid redeclaration
-  onlyif  => 'test ! -f /home/ubuntu/.ssh/config',
+file_line { 'Declare identity file':
+  path  => '/home/ubuntu/.ssh/config',
+  line  => 'IdentityFile ~/.ssh/school',
+  match => '^IdentityFile',
+}
+
+file_line { 'Turn off passwd auth':
+  path  => '/home/ubuntu/.ssh/config',
+  line  => 'PasswordAuthentication no',
+  match => '^PasswordAuthentication',
 }
