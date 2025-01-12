@@ -2,11 +2,11 @@
 # Client configuration file
 
 file_line { 'Declare identity file':
-  path  => '/home/ubuntu/.ssh/config',
-  line  => 'IdentityFile ~/.ssh/school',
+  path => '/etc/ssh/ssh_config',
+  line => 'IdentityFile ~/.ssh/school',
 }
 
 file_line { 'Turn off passwd auth':
-  path  => '/home/ubuntu/.ssh/config',
-  line  => 'PasswordAuthentication no',
+  path => '/etc/ssh/ssh_config',
+  line => 'PasswordAuthentication no',
 }
