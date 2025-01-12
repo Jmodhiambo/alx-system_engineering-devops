@@ -1,20 +1,65 @@
 # Client configuration file
 
 file { '/home/ubuntu/.ssh/config':
-    ensure => 'file',
-    owner  => 'ubuntu',
-    group  => 'ubuntu',
-    mode   => '0600',
-}
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
 
-file_line { 'Declare identity file':
-    path  => '/home/ubuntu/.ssh/config',
-    line  => 'IdentityFile ~/.ssh/school',
-    match => '^IdentityFile',
-}
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
 
-file_line { 'Turn off passwd auth':
-    path  => '/home/ubuntu/.ssh/config',
-    line  => 'PasswordAuthentication no',
-    match => '^PasswordAuthentication',
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
+
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
+
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
+
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
+
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}# Client configuration file
+
+file { '/home/ubuntu/.ssh/config':
+  ensure  => file,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  mode    => '0600',
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
 }
