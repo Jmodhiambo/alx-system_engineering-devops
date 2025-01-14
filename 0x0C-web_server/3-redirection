@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-# This script configures Nginx to redirect /redirect_me to another page with a 301 status code
+# This script installs Nginx and configures a 301 redirection from /redirect_me to a specific URL
 
-# Variables
-REDIRECT_URL="https://www.youtube.com/watch?v=QH2-TGUlwu4"
-CONFIG_FILE="/etc/nginx/sites-available/default"
+# Update package list
+sudo apt update -y
+
+# Install Nginx
+sudo apt install nginx -y
 
 # Ensure Nginx is started (without using systemctl)
 sudo service nginx start
 
 # Configure the redirection in the Nginx configuration file
+REDIRECT_URL="https://www.youtube.com/watch?v=QH2-TGUlwu4"
+CONFIG_FILE="/etc/nginx/sites-available/default"
+
+# Add redirection rule using sed
 sudo sed -i "/server_name _;/a \\    location /redirect_me/ { return 301 ${REDIRECT_URL}; }" "$CONFIG_FILE"
 
 # Restart Nginx to apply changes (without using systemctl)
