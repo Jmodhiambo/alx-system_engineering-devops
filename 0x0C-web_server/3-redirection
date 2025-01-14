@@ -10,6 +10,7 @@ sudo apt install nginx -y
 # Ensure Nginx is started (without using systemctl)
 sudo service nginx start
 
+sudo chown -R ubuntu /var/www
 # Replace the default Nginx page with "Hello World!"
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
