@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script installs and configures Nginx on an Ubuntu server
+
+# Update package list
+sudo apt update -y
+
+# Install Nginx
+sudo apt install nginx -y
+
+# Ensure Nginx is started (without using systemctl)
+sudo service nginx start
+
+# Replace the default Nginx page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Restart Nginx to apply changes (without using systemctl)
+sudo service nginx restart
+
+# Enable Nginx to start on boot (without using systemctl)
+sudo update-rc.d nginx defaults
