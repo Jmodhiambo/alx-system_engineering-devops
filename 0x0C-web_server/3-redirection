@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
-# Install Nginx and configure a 301 redirect for /redirect_me
+# Install Nginx, configure a 301 redirect, and set up a "Hello World!" page
 
 # Update package lists and install Nginx
 sudo apt-get update
 sudo apt-get install -y nginx
 
-# Define the redirection configuration as a variable
+# Replace the default Nginx page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+
+# Define the redirection configuration
 REDIRECT_CONFIG="location = /redirect_me { return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4; }"
 
-# Insert the redirection configuration into the Nginx configuration file
+# Insert the redirection rule into the Nginx configuration
 sudo sed -i "/server_name _;/a $REDIRECT_CONFIG" /etc/nginx/sites-available/default
 
-# Restart Nginx to apply the changes
+# Restart Nginx to apply changes
 sudo service nginx restart
