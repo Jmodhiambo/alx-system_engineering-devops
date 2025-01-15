@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Debugging Apache to run on the container
+docker exec -it <container_id> /bin/bash
+service apache2 start
+echo "Hello ALX" > /var/www/html/index.html
+exit
