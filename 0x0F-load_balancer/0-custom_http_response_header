@@ -1,0 +1,22 @@
+#!/bin/bash
+# 0-custom_http_response_header
+# Configures Nginx to include a custom HTTP header "X-Served-By" with the hostname
+
+# Update and install Nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Set ownership of /var/www
+sudo chown -R ubuntu:ubuntu /var/www
+
+# Replace default index page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+
+# Get the hostname of the server
+HOSTNAME=$(hostname)
+
+# Add the custom header to the Nginx configuration
+sudo sed -i "/server_name _;/a \\\n    add_header X-Served-By \"$HOSTNAME\";" /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes
+sudo service nginx restart
