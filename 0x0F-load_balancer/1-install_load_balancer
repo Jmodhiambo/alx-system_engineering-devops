@@ -16,7 +16,7 @@ frontend front_server
 backend back_servers
         balance roundrobin
         server 806536-web-01 34.203.75.109:80 check
-        server 806536-web-02 100.25.29.224:80 check
+        server 806536-web-02 3.86.13.56:80 check
 ' >> /etc/haproxy/haproxy.cfg
 
 # Restart HAproxy service
