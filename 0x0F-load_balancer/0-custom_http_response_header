@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
-# 0-custom_http_response_header
-# Configures Nginx to include a custom HTTP header "X-Served-By" with the hostname
+# Configure Nginx server with custom HTTP response header, redirection, and custom 404 page
 
 # Update and install Nginx
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y nginx
 
-# Set ownership of /var/www
-sudo chown -R ubuntu:ubuntu /var/www
-
-# Replace default index page with "Hello World!"
+# Set up the default "Hello World!" page
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 
-# Get the hostname of the server
-HOSTNAME=$(hostname)
+# Set up a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 
-# Add the custom header to the Nginx configuration
-sudo sed -i "/server_name _;/a \\\n    add_header X-Served-By \"$HOSTNAME\";" /etc/nginx/sites-available/default
+# Add custom configurations to the default Nginx site
+sudo sed -i '/server_name _;/a \
+    add_header X-Served-By $(hostname);\n\
+    location = /redirect_me {\n\
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\
+    }\n\
+    error_page 404 /custom_404.html;\n\
+    location = /custom_404.html {\n\
+        root /usr/share/nginx/html;\n\
+        internal;\n\
+    }' /etc/nginx/sites-available/default
 
-# Restart Nginx to apply changes
+# Restart Nginx to apply the changes
 sudo service nginx restart
