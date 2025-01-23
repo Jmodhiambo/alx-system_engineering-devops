@@ -4,10 +4,11 @@
 # Ensure Nginx is installed
 apt-get update -y && apt-get install -y nginx
 
-# Ensure Nginx is listening on all IPv4 interfaces on port 80
-if ! grep -q "listen 0.0.0.0:80" /etc/nginx/sites-enabled/default; then
-    sed -i 's/listen 80 default_server;/listen 0.0.0.0:80 default_server;/' /etc/nginx/sites-enabled/default
-fi
+# Deleting the current nginx configurations if available
+rm /etc/nginx/sites-enabled/default
+
+# Reconfiguring nginx by linking to sites-enabled
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Restart Nginx to apply the configuration
 service nginx restart
