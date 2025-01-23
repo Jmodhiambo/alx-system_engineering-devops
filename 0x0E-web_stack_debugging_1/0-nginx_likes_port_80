@@ -8,4 +8,4 @@ apt-get update -y && apt-get install -y nginx
 sed -i 's/listen 80 default_server;/listen 0.0.0.0:80 default_server;/' /etc/nginx/sites-enabled/default
 
 # Restart Nginx to apply changes
-systemctl restart nginx
+service restart nginx
