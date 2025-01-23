@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script debugs an Ubuntu container's Nginx installation
+
+# Ensure Nginx is installed
+apt-get update -y && apt-get install -y nginx
+
+# Update Nginx configuration to listen on port 80 for all IPv4 addresses
+sed -i 's/listen 80 default_server;/listen 0.0.0.0:80 default_server;/' /etc/nginx/sites-enabled/default
+
+# Restart Nginx to apply changes
+systemctl restart nginx
