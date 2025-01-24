@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Function to query a subdomain and display its record information
+get_subdomain_info() {
+    local domain="$1"
+    local subdomain="$2"
+
+    # Use dig to get the record information for the subdomain
+    record_info=$(dig "$subdomain.$domain" +noall +answer | awk '{if ($4 == "A") print $5}')
+    record_type="A"  # Assume all queried subdomains are type A
+
+    if [ -z "$record_info" ]; then
+        echo ""
+    else
+        echo "The subdomain $subdomain is a $record_type record and points to $record_info"
+    fi
+}
+
+# Main script logic
+domain="$1"
+subdomain="$2"
+
+# Check if the domain parameter is provided
+if [ -z "$domain" ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+# If a specific subdomain is provided, get its info
+if [ -n "$subdomain" ]; then
+    get_subdomain_info "$domain" "$subdomain"
+else
+    # Default subdomains to query
+    subdomains=("www" "lb-01" "web-01" "web-02")
+
+    for sub in "${subdomains[@]}"; do
+        get_subdomain_info "$domain" "$sub"
+    done
+fi
