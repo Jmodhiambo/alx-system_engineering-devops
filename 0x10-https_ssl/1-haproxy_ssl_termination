@@ -47,5 +47,5 @@ frontend http
 backend backend_servers
     balance roundrobin
     option httpchk GET / HTTP/1.1\r\nHost:\ www.jmodhiambo.tech
-    server 806536-web-01 52.87.219.241:80 check
-    server 806536-web-02 54.242.162.151:80 check
+    server 806536-web-01 100.26.214.60:80 check
+    server 806536-web-02 3.86.13.56:80 check
