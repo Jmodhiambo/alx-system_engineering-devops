@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script configure the container so that Nginx runs as the nginx user and listens on port 8080
 
 # Ensure nginx user exists
 id -u nginx &>/dev/null || useradd -r -d /var/www -s /sbin/nologin nginx
