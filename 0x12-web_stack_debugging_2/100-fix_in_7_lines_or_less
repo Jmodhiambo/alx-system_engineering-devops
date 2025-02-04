@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# This sript shortes script 1-run_nginx_as_nginx to 7 or less lines
+# Configure Nginx to run as nginx user and listen on port 8080
 sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/listen 80 /listen 8080 /' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 /listen \[::\]:8080 /' /etc/nginx/sites-available/default
-service nginx restart
+sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
+chown -R nginx:nginx /var/lib/nginx /var/log/nginx /var/www/html
+sudo service nginx restart
