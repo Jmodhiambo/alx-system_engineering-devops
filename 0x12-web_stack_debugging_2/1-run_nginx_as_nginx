@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Ensure nginx user exists
+id -u nginx &>/dev/null || useradd -r -d /var/www -s /sbin/nologin nginx
+
+# Update Nginx configuration to run as nginx user and listen on port 8080
+sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
+sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:8080 default_server;/' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes
+service nginx restart
