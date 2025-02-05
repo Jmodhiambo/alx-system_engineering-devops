@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# This script generates a MySQL dump, compress it, and name it according to the required format
+
+# Check if password argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <mysql_root_password>"
+    exit 1
+fi
+
+PASSWORD=$1
+DATE=$(date +"%d-%m-%Y")  # Format: day-month-year
+
+# Dump all MySQL databases
+mysqldump -u root -p"$PASSWORD" --all-databases > backup.sql
+
+# Compress the backup file
+tar -czf "$DATE.tar.gz" backup.sql
+
+# Optional: Remove the uncompressed SQL file to save space
+rm backup.sql
+
+echo "Backup successfully created: $DATE.tar.gz"
