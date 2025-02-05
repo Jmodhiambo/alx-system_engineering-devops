@@ -3,7 +3,6 @@
 
 # Check if password argument is provided
 if [ $# -ne 1 ]; then
-    echo "Usage: $0 <mysql_root_password>"
     exit 1
 fi
 
@@ -15,8 +14,3 @@ mysqldump -u root -p"$PASSWORD" --all-databases > backup.sql
 
 # Compress the backup file
 tar -czf "$DATE.tar.gz" backup.sql
-
-# Optional: Remove the uncompressed SQL file to save space
-rm backup.sql
-
-echo "Backup successfully created: $DATE.tar.gz"
