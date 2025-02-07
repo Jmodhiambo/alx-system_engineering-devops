@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
-# This script configure the container so that Nginx runs as the nginx user and listens on port 8080
+# Script to fix Nginx to run as nginx user and listen on port 8080.
 
-# Ensure nginx user exists
-id -u nginx &>/dev/null || useradd -r -d /var/www -s /sbin/nologin nginx
+# Modify Nginx config to run as nginx user.
+sudo sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 
-# Update Nginx configuration to run as nginx user and listen on port 8080
-sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:8080 default_server;/' /etc/nginx/sites-available/default
+# Modify the default site configuration to listen on port 8080.
+sudo sed -i "s/listen 80/listen 8080/" /etc/nginx/sites-available/default
 
-# Restart Nginx to apply changes
-service nginx restart
+# Ensure proper file permissions.
+sudo chmod 644 /etc/nginx/nginx.conf
+
+# Stop any running Nginx process.
+sudo service nginx stop
+
+# Ensure port 8080 is free.
+sudo lsof -i :8080
+
+# Kill any process using port 8080.
+# Example: sudo kill -9 <PID>
+
+# Restart Nginx as the nginx user.
+sudo -u nginx /usr/sbin/nginx
