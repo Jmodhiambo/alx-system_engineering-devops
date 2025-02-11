@@ -3,12 +3,12 @@
 his/her TODO list progress.
 """
 
-from sys import argv
 import requests
+import sys
 
 
 if __name__ == "__main__":
-    user_id = int(argv[1])
+    user_id = int(sys.argv[1])
 
     emp_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
     todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={user_id}"
