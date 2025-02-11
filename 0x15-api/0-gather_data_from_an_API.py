@@ -3,8 +3,8 @@
 his/her TODO list progress.
 """
 
-import requests
 from sys import argv
+import requests
 
 user_id = int(argv[1])
 
