@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
 # Script to reload Gunicorn gracefully (no downtime)
 
-pkill -HUP gunicorn
+#Find the master process ID for Gunicorn
+GUNICORN_PID=$(pgrep -f 'gunicorn' | head -n 1)
+
+if [ -z "$GUNICORN_PID" ]; then
+    exit 1
+fi
+
+# Send HUP signal to the master process
+kill -HUP "$GUNICORN_PID"
+
+if [ $? -eq 0 ]; then
+    echo "OK"
+else
+    exit 1
+fi
